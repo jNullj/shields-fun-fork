@@ -65,8 +65,8 @@ async function run() {
             client,
             'cloud-annotations',
             'docusaurus-openapi',
-            `v${oldVersion}`,
             `v${newVersion}`,
+            `v${oldVersion}`,
           )
           const changedComponents = overideComponents.filter(
             componenet =>
