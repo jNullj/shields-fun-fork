@@ -28,7 +28,7 @@ async function run() {
     if (
       ['dependabot[bot]', 'dependabot-preview[bot]'].includes(pr.user.login)
     ) {
-      const files = getAllFilesForPullRequest(
+      const files = await getAllFilesForPullRequest(
         client,
         github.context.repo.owner,
         github.context.repo.repo,
@@ -61,7 +61,7 @@ async function run() {
         }
 
         if (newVersion) {
-          const pkgChangedFiles = getChangedFilesBetweenTags(
+          const pkgChangedFiles = await getChangedFilesBetweenTags(
             client,
             github.context.repo.owner,
             github.context.repo.repo,
