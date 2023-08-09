@@ -14,16 +14,13 @@ function getAllFilesForPullRequest(client, owner, repo, pullNumber) {
   let page = 1 // Start with the first page
   let allFiles = []
   while (true) {
-    const response = client.request(
-      'GET /repos/{owner}/{repo}/pulls/{pull_number}/files',
-      {
-        owner,
-        repo,
-        pull_number: pullNumber,
-        per_page: perPage,
-        page,
-      },
-    )
+    const response = client.rest.pulls.listFiles({
+      owner,
+      repo,
+      pull_number: pullNumber,
+      per_page: perPage,
+      page,
+    })
 
     if (response.data.length === 0) {
       // Break the loop if no more results
