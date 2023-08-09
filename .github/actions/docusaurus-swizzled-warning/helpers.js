@@ -21,7 +21,6 @@ async function getAllFilesForPullRequest(client, owner, repo, pullNumber) {
       per_page: perPage,
       page,
     })
-    console.log('res:', response)
 
     if (response.data.length === 0) {
       // Break the loop if no more results
