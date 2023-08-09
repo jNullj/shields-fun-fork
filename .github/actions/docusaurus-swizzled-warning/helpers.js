@@ -9,12 +9,12 @@
  * @param {number} pullNumber pull request number
  * @returns {object[]} array of object that describe pr changed files - see https://docs.github.com/en/rest/pulls/pulls?apiVersion=2022-11-28#list-pull-requests-files
  */
-async function getAllFilesForPullRequest(client, owner, repo, pullNumber) {
+function getAllFilesForPullRequest(client, owner, repo, pullNumber) {
   const perPage = 100 // Max number of items per page
   let page = 1 // Start with the first page
   let allFiles = []
   while (true) {
-    const response = await client.request(
+    const response = client.request(
       'GET /repos/{owner}/{repo}/pulls/{pull_number}/files',
       {
         owner,
@@ -48,14 +48,8 @@ async function getAllFilesForPullRequest(client, owner, repo, pullNumber) {
  * @param {string} headTag head tag
  * @returns {string[]} Array listing all changed files betwen the base tag and the head tag
  */
-async function getChangedFilesBetweenTags(
-  client,
-  owner,
-  repo,
-  baseTag,
-  headTag,
-) {
-  const response = await client.rest.repos.compareCommits({
+function getChangedFilesBetweenTags(client, owner, repo, baseTag, headTag) {
+  const response = client.rest.repos.compareCommits({
     owner,
     repo,
     base: baseTag,
