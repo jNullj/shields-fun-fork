@@ -67,8 +67,8 @@ async function run() {
           console.log('i will retrive changes')
           const pkgChangedFiles = await getChangedFilesBetweenTags(
             client,
-            github.context.repo.owner,
-            github.context.repo.repo,
+            'cloud-annotations',
+            'docusaurus-openapi',
             oldVersion,
             newVersion,
           )
