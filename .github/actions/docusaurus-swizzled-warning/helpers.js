@@ -53,7 +53,7 @@ async function getChangedFilesBetweenTags(
   baseTag,
   headTag,
 ) {
-  const response = await client.repos.compareCommits({
+  const response = await client.rest.repos.compareCommits({
     owner,
     repo,
     base: baseTag,
