@@ -56,7 +56,6 @@ async function getChangedFilesBetweenTags(
     base: baseTag,
     head: headTag,
   })
-  console.log('res:', response)
 
   return response.data.files.map(file => file.filename)
 }
