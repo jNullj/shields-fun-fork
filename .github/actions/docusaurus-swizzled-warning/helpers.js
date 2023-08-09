@@ -22,12 +22,12 @@ async function getAllFilesForPullRequest(client, owner, repo, pullNumber) {
       page,
     })
 
-    if (response.length === 0) {
+    if (response.data.length === 0) {
       // Break the loop if no more results
       break
     }
 
-    allFiles = allFiles.concat(response)
+    allFiles = allFiles.concat(response.data)
     page++ // Move to the next page
   }
   return allFiles
