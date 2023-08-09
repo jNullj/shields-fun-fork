@@ -70,8 +70,11 @@ async function run() {
           )
           const changedComponents = overideComponents.filter(
             componenet =>
-              pkgChangedFiles.includes('docusaurus-theme-openapi/src/theme') &&
-              pkgChangedFiles.includes(componenet),
+              pkgChangedFiles.filter(
+                path =>
+                  path.includes('docusaurus-theme-openapi/src/theme') &&
+                  path.includes(componenet),
+              ).length > 0,
           )
           const versionReport = `| Old version | ${oldVersion} |
           | New version | ${newVersion} |
