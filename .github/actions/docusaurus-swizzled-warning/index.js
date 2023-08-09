@@ -34,13 +34,13 @@ async function run() {
         github.context.repo.repo,
         pr.number,
       )
-      console.log('files:', files)
 
       for (const file of files) {
+        console.log('loop file:', file.filename)
         if (!['package.json', 'package-lock.json'].includes(file.filename)) {
           continue
         }
-
+        console.log('filename fit')
         const patchLines = file.patch.split('\n')
         const versionRegex = /\d+\.\d+\.\d+/
 
@@ -55,13 +55,16 @@ async function run() {
             const match = patchLines[i].match(versionRegex)
             if (patchLines[i][0] === '+') {
               newVersion = match[0]
+              console.log('found new ver:', newVersion)
             } else {
               oldVersion = match[0]
+              console.log('found old ver:', oldVersion)
             }
           }
         }
 
         if (newVersion) {
+          console.log('i will retrive changes')
           const pkgChangedFiles = await getChangedFilesBetweenTags(
             client,
             github.context.repo.owner,
@@ -69,11 +72,13 @@ async function run() {
             oldVersion,
             newVersion,
           )
+          console.log('got changes')
           const changedComponents = overideComponents.filter(
             componenet =>
               pkgChangedFiles.includes('docusaurus-theme-openapi/src/theme') &&
               pkgChangedFiles.includes(componenet),
           )
+          console.log('lets print')
           const versionReport = `| Old version | ${oldVersion} |
           | New version | ${newVersion} |
           `
