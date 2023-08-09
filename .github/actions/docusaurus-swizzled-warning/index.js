@@ -34,6 +34,7 @@ async function run() {
         github.context.repo.repo,
         pr.number,
       )
+      console.log('files:', files)
 
       for (const file of files) {
         if (!['package.json', 'package-lock.json'].includes(file.filename)) {

@@ -30,6 +30,8 @@ async function getAllFilesForPullRequest(client, owner, repo, pullNumber) {
       break
     }
 
+    console.log('res_data:s', response.data)
+
     allFiles = allFiles.concat(response.data)
     page++ // Move to the next page
   }
