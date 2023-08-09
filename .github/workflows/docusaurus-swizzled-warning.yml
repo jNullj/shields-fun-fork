@@ -7,7 +7,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  auto-close:
+  docusaurus-swizzled-warning:
     runs-on: ubuntu-latest
     if: github.actor == 'dependabot[bot]'
     steps:
