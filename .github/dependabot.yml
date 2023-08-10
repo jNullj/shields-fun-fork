@@ -5,7 +5,8 @@ updates:
     directory: '/'
     schedule:
       interval: daily
-      time: '12:00'
+      time: '20:04'
+      timezone: "Asia/Jerusalem"
     open-pull-requests-limit: 99
     rebase-strategy: disabled
     ignore:
