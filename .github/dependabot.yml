@@ -4,8 +4,7 @@ updates:
   - package-ecosystem: npm
     directory: '/'
     schedule:
-      interval: weekly
-      day: friday
+      interval: daily
       time: '12:00'
     open-pull-requests-limit: 99
     rebase-strategy: disabled
