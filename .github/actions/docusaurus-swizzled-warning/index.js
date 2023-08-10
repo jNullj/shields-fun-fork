@@ -42,6 +42,8 @@ async function run() {
           continue
         }
 
+        console.log('file_:', file)
+
         const patchLines = file.patch.split('\n')
         const versionRegex = /\d+\.\d+\.\d+/
 
