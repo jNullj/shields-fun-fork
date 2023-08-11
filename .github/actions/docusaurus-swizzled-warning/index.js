@@ -51,15 +51,15 @@ async function run() {
           const diff = await (await fetch(url)).text()
           const diffFiles = diffParse(diff)
           console.log('diff parse:', diffFiles)
-          for (const df in diffFiles) {
+          for (const df of diffFiles) {
             if (df.to !== file.filename) {
               console.log('wrong file:', df.to, '=/=', file.filename)
               continue
             }
             console.log('adding lines for file:', df.to)
-            for (const chunk in df.chunks) {
+            for (const chunk of df.chunks) {
               console.log('add for chunk:', chunk)
-              for (const change in chunk.changes) {
+              for (const change of chunk.changes) {
                 console.log('adding patch line:', change)
                 file.patch += `${change}\n`
               }
