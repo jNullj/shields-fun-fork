@@ -50,7 +50,6 @@ async function run() {
           const url = `https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/pull/${pr.number}.diff`
           const diff = await (await fetch(url)).text()
           const diffFiles = diffParse(diff)
-          console.log('diff parse:', diffFiles)
           for (const df of diffFiles) {
             if (df.to !== file.filename) {
               console.log('wrong file:', df.to, '=/=', file.filename)
@@ -58,10 +57,9 @@ async function run() {
             }
             console.log('adding lines for file:', df.to)
             for (const chunk of df.chunks) {
-              console.log('add for chunk:', chunk)
               for (const change of chunk.changes) {
-                console.log('adding patch line:', change)
-                file.patch += `${change}\n`
+                console.log('adding patch line:', change.content)
+                file.patch += `${change.content}\n`
               }
             }
           }
