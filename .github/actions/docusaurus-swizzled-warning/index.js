@@ -47,6 +47,11 @@ async function run() {
           continue
         }
 
+        console.log('raw_url', file.raw_url)
+        console.log(
+          'new_url',
+          `https://raw.githubusercontent.com/${github.context.repo.owner}/${github.context.repo.repo}/master/${file.filename}`,
+        )
         const pkgLockNewJson = await (await fetch(file.raw_url)).json()
         const pkgLockOldJson = await (
           await fetch(
