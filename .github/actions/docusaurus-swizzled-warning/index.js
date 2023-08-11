@@ -72,6 +72,7 @@ async function run() {
         let newVersion
 
         for (let i = 0; i < patchLines.length; i++) {
+          console.log('proccess line ', i, ' which is:', patchLines[i])
           if (
             ['+', '-'].includes(patchLines[i][0]) &&
             patchLines[i].includes(packageName)
