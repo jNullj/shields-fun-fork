@@ -51,6 +51,8 @@ async function run() {
             `https://raw.githubusercontent.com/${github.context.repo.owner}/${github.context.repo.repo}/master/${file.filename}`,
           )
         ).json()
+        console.log('old:', pkgLockOldJson)
+        console.log('new:', pkgLockNewJson)
         const oldVersion =
           pkgLockOldJson.packages[`node_modules/${packageName}`].version
         const newVersion =
