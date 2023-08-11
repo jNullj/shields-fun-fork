@@ -42,6 +42,7 @@ async function run() {
       )
 
       for (const file of files) {
+        console.log('test_file:', file.filename)
         if (file.filename !== 'package-lock.json') {
           continue
         }
