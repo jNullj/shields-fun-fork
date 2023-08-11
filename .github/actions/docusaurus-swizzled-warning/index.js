@@ -6,6 +6,7 @@ const fetch = require('node-fetch')
 const {
   getAllFilesForPullRequest,
   getChangedFilesBetweenTags,
+  findKeyEndingWith,
 } = require('./helpers')
 
 async function run() {
@@ -51,12 +52,16 @@ async function run() {
             `https://raw.githubusercontent.com/${github.context.repo.owner}/${github.context.repo.repo}/master/${file.filename}`,
           )
         ).json()
-        console.log('old:', pkgLockOldJson)
-        console.log('new:', pkgLockNewJson)
-        const oldVersion =
-          pkgLockOldJson.packages[`node_modules/${packageName}`].version
-        const newVersion =
-          pkgLockNewJson.packages[`node_modules/${packageName}`].version
+        const oldVesionModuleKey = findKeyEndingWith(
+          oldVersion.packages,
+          `node_modules/${packageName}`,
+        )
+        const newVesionModuleKey = findKeyEndingWith(
+          newVersion.packages,
+          `node_modules/${packageName}`,
+        )
+        const oldVersion = pkgLockOldJson.packages[oldVesionModuleKey].version
+        const newVersion = pkgLockNewJson.packages[newVesionModuleKey].version
 
         if (newVersion !== oldVersion) {
           const pkgChangedFiles = await getChangedFilesBetweenTags(
