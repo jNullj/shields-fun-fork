@@ -53,11 +53,11 @@ async function run() {
           )
         ).json()
         const oldVesionModuleKey = findKeyEndingWith(
-          oldVersion.packages,
+          pkgLockOldJson.packages,
           `node_modules/${packageName}`,
         )
         const newVesionModuleKey = findKeyEndingWith(
-          newVersion.packages,
+          pkgLockNewJson.packages,
           `node_modules/${packageName}`,
         )
         const oldVersion = pkgLockOldJson.packages[oldVesionModuleKey].version
