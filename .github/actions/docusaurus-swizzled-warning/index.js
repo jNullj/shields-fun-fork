@@ -62,6 +62,8 @@ async function run() {
         )
         const oldVersion = pkgLockOldJson.packages[oldVesionModuleKey].version
         const newVersion = pkgLockNewJson.packages[newVesionModuleKey].version
+        console.log('old_ver:', oldVersion)
+        console.log('new_ver:', newVersion)
 
         if (newVersion !== oldVersion) {
           const pkgChangedFiles = await getChangedFilesBetweenTags(
