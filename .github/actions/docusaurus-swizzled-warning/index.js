@@ -49,13 +49,17 @@ async function run() {
           // patch can be extracted from pr diff
           const url = `https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/pull/${pr.number}.diff`
           const diff = await (await fetch(url)).text()
+          console.log('for file:', file.filename)
+          console.log('i got diff:', diff)
           const diffFiles = diffParse(diff)
+          console.log('diff parse:', diffFiles)
           for (const df in diffFiles) {
             if (df.to !== file.filename) {
               continue
             }
             for (const chunk in df.chunks) {
               for (const change in chunk.changes) {
+                console.log('adding patch line:', change)
                 file.patch += `${change}\n`
               }
             }
