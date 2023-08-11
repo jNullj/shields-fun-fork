@@ -52,13 +52,11 @@ async function run() {
           const diffFiles = diffParse(diff)
           for (const df of diffFiles) {
             if (df.to !== file.filename) {
-              console.log('wrong file:', df.to, '=/=', file.filename)
               continue
             }
             console.log('adding lines for file:', df.to)
             for (const chunk of df.chunks) {
               for (const change of chunk.changes) {
-                console.log('adding patch line:', change.content)
                 file.patch += `${change.content}\n`
               }
             }
@@ -73,6 +71,9 @@ async function run() {
 
         for (let i = 0; i < patchLines.length; i++) {
           console.log('proccess line ', i, ' which is:', patchLines[i])
+          if (patchLines[i] === undefined) {
+            continue
+          } // in case of empty line
           if (
             ['+', '-'].includes(patchLines[i][0]) &&
             patchLines[i].includes(packageName)
