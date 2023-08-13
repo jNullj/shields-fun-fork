@@ -50,7 +50,7 @@ async function run() {
           owner: github.context.repo.owner,
           repo: github.context.repo.repo,
           path: file.filename,
-          ref: file.contents_url.split('repo=')[1],
+          ref: file.contents_url.split('ref=')[1],
         })
         console.log('pkgLockNewJson-ref=', file.contents_url.split('ref=')[1])
         console.log('pkgLockNewJson-CONTENT=', pkgLockNewJson)
