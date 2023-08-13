@@ -46,20 +46,30 @@ async function run() {
           continue
         }
 
-        const pkgLockNewJson = await client.rest.repos.getContent({
-          owner: github.context.repo.owner,
-          repo: github.context.repo.repo,
-          path: file.filename,
-          ref: file.contents_url.split('ref=')[1],
-        })
+        const pkgLockNewJson = (
+          await client.rest.repos.getContent({
+            owner: github.context.repo.owner,
+            repo: github.context.repo.repo,
+            path: file.filename,
+            ref: file.contents_url.split('ref=')[1],
+            mediaType: {
+              format: 'raw',
+            },
+          })
+        ).data.conetnt
         console.log('pkgLockNewJson-ref=', file.contents_url.split('ref=')[1])
         console.log('pkgLockNewJson-CONTENT=', pkgLockNewJson)
-        const pkgLockOldJson = await client.rest.repos.getContent({
-          owner: github.context.repo.owner,
-          repo: github.context.repo.repo,
-          path: file.filename,
-          ref: 'master',
-        })
+        const pkgLockOldJson = (
+          await client.rest.repos.getContent({
+            owner: github.context.repo.owner,
+            repo: github.context.repo.repo,
+            path: file.filename,
+            ref: 'master',
+            mediaType: {
+              format: 'raw',
+            },
+          })
+        ).data.conetnt
         console.log('pkgLockOldJson-ref=master')
         console.log('pkgLockOldJson-CONTENT=', pkgLockOldJson)
         const oldVesionModuleKey = findKeyEndingWith(
