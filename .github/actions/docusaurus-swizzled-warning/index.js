@@ -2,7 +2,6 @@
 
 const core = require('@actions/core')
 const github = require('@actions/github')
-const fetch = require('node-fetch')
 const {
   getAllFilesForPullRequest,
   getChangedFilesBetweenTags,
@@ -47,12 +46,23 @@ async function run() {
           continue
         }
 
-        const pkgLockNewJson = await (await fetch(file.raw_url)).json()
-        const pkgLockOldJson = await (
-          await fetch(
-            `https://raw.githubusercontent.com/${github.context.repo.owner}/${github.context.repo.repo}/master/${file.filename}`,
-          )
-        ).json()
+        const pkgLockNewJson = client.rest.repos.getContent({
+          owner: github.context.repo.owner,
+          repo: github.context.repo.repo,
+          path: file.raw_url,
+        })
+        console.log('pkgLockNewJson-URL=', file.raw_url)
+        console.log('pkgLockNewJson-CONTENT=', pkgLockNewJson)
+        const pkgLockOldJson = client.rest.repos.getContent({
+          owner: github.context.repo.owner,
+          repo: github.context.repo.repo,
+          path: `https://raw.githubusercontent.com/${github.context.repo.owner}/${github.context.repo.repo}/master/${file.filename}`,
+        })
+        console.log(
+          'pkgLockOldJson-URL=',
+          `https://raw.githubusercontent.com/${github.context.repo.owner}/${github.context.repo.repo}/master/${file.filename}`,
+        )
+        console.log('pkgLockOldJson-CONTENT=', pkgLockOldJson)
         const oldVesionModuleKey = findKeyEndingWith(
           pkgLockOldJson.packages,
           `node_modules/${packageName}`,
