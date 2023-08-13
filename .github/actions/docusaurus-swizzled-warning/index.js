@@ -52,7 +52,7 @@ async function run() {
           path: file.filename,
           ref: file.contents_url.split('repo=')[1],
         })
-        console.log('pkgLockNewJson-ref=', file.contents_url.split('repo=')[1])
+        console.log('pkgLockNewJson-ref=', file.contents_url.split('ref=')[1])
         console.log('pkgLockNewJson-CONTENT=', pkgLockNewJson)
         const pkgLockOldJson = await client.rest.repos.getContent({
           owner: github.context.repo.owner,
