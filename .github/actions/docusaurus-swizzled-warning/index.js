@@ -46,7 +46,7 @@ async function run() {
           continue
         }
 
-        const test1 = (
+        const pkgLockNewSha = (
           await client.rest.repos.getContent({
             owner: github.context.repo.owner,
             repo: github.context.repo.repo,
@@ -54,19 +54,17 @@ async function run() {
             ref: file.contents_url.split('ref=')[1],
           })
         ).data.sha
-        const blobNew = (
+        const pkgLockNewBlob = (
           await client.rest.git.getBlob({
             owner: github.context.repo.owner,
             repo: github.context.repo.repo,
-            file_sha: test1,
+            file_sha: pkgLockNewSha,
           })
         ).data.content
         const pkgLockNewJson = JSON.parse(
-          Buffer.from(blobNew, 'base64').toString(),
+          Buffer.from(pkgLockNewBlob, 'base64').toString(),
         )
-        console.log('pkgLockNewJson-ref=', file.contents_url.split('ref=')[1])
-        console.log('pkgLockNewJson-CONTENT=', pkgLockNewJson)
-        const test2 = (
+        const pkgLockOldSha = (
           await client.rest.repos.getContent({
             owner: github.context.repo.owner,
             repo: github.context.repo.repo,
@@ -74,18 +72,17 @@ async function run() {
             ref: 'master',
           })
         ).data.sha
-        const blobOld = (
+        const pkgLockOldBlob = (
           await client.rest.git.getBlob({
             owner: github.context.repo.owner,
             repo: github.context.repo.repo,
-            file_sha: test2,
+            file_sha: pkgLockOldSha,
           })
         ).data.content
         const pkgLockOldJson = JSON.parse(
-          Buffer.from(blobOld, 'base64').toString(),
+          Buffer.from(pkgLockOldBlob, 'base64').toString(),
         )
-        console.log('pkgLockOldJson-ref=master')
-        console.log('pkgLockOldJson-CONTENT=', pkgLockOldJson)
+
         const oldVesionModuleKey = findKeyEndingWith(
           pkgLockOldJson.packages,
           `node_modules/${packageName}`,
