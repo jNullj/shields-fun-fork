@@ -45,6 +45,9 @@ describe('The badge generator', function () {
       given('hsl(360,50%,50%,0.5)').expect('hsl(360,50%,50%,0.5)')
       given('hsla(25,20%,0%,0.1)').expect('hsla(25,20%,0%,0.1)')
       given('hsla(0,50%,101%)').expect('hsla(0,50%,101%)')
+      // valid hwb(a)
+      given('hwb(9,3%,95%)').expect('hwb(9,3%,95%)')
+      given('hwb(0,0%,100%,0.3)').expect('hwb(0,0%,100%,0.3)')
       // CSS named color.
       given('papayawhip').expect('papayawhip')
       // Shields named color.
