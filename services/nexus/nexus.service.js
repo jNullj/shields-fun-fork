@@ -38,7 +38,7 @@ Possible values: <a href="https://help.sonatype.com/en/searching-for-components.
   },
   {
     name: 'filter',
-    example: '1.2.*',
+    example: '9.3.*',
     description: 'Glob filter to select matching versions',
   },
 )
