@@ -30,7 +30,7 @@ class Depfu extends BaseJsonService {
           },
           {
             name: 'project',
-            example: 'depfu/example-ruby',
+            example: 'depfu/example-js',
           },
         ),
       },

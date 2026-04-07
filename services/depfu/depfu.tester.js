@@ -11,7 +11,7 @@ const isDependencyStatus = Joi.string().valid(
 export const t = new ServiceTester({ id: 'depfu', title: 'Depfu' })
 
 t.create('depfu Github dependencies (valid)')
-  .get('/dependencies/github/depfu/example-ruby.json')
+  .get('/dependencies/github/depfu/example-js.json')
   .expectBadge({
     label: 'dependencies',
     message: isDependencyStatus,
@@ -22,14 +22,14 @@ t.create('depfu Github dependencies (repo not found)')
   .expectBadge({ label: 'dependencies', message: 'not found' })
 
 t.create('depfu Gitlab dependencies (valid)')
-  .get('/dependencies/gitlab/depfu/example-ruby.json')
+  .get('/dependencies/gitlab/depfu/example-js.json')
   .expectBadge({
     label: 'dependencies',
     message: isDependencyStatus,
   })
 
 t.create('depfu Github dependencies (no separator)')
-  .get('/dependencies/github/example-ruby.json')
+  .get('/dependencies/github/example-js.json')
   .expectBadge({
     label: 'dependencies',
     message: 'invalid parameter',
@@ -49,12 +49,12 @@ t.create('depfu Gitlab dependencies (repo not found)')
   .expectBadge({ label: 'dependencies', message: 'not found' })
 
 t.create('depfu Gitlab dependencies (no separator)')
-  .get('/dependencies/gitlab/example-ruby.json')
+  .get('/dependencies/gitlab/example-js.json')
   .expectBadge({
     label: 'dependencies',
     message: 'invalid parameter',
   })
 
 t.create('legacy route (assume "github" as a default VCS)')
-  .get('/depfu/example-ruby.svg')
-  .expectRedirect('/depfu/dependencies/github/depfu/example-ruby.svg')
+  .get('/depfu/example-js.svg')
+  .expectRedirect('/depfu/dependencies/github/depfu/example-js.svg')
