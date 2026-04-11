@@ -99,13 +99,35 @@ class BaseService {
   }
 
   /**
-   * Extract an array of allowed values from this service's route pattern
-   * for a given route parameter
+   * If the route pattern includes an enum, this property should be set to the
+   * array of allowed values. This is used to validate the route pattern and
+   * generate the OpenAPI spec.
+   * enum applies to the first param in the route pattern.
+   *
+   * @abstract
+   * @type {string[]} array of allowed values for the enum in the route pattern
+   */
+  static routeEnum = undefined
+
+  /**
+   * If old route enum is used (legacy):
+   *  Extract an array of allowed values from this service's route pattern
+   *  for a given route parameter
+   *
+   * If new routeEnum is used:
+   *  Return the array of allowed values for a given route parameter from the
+   *  routeEnum property
    *
    * @param {string} param The name of a param in this service's route pattern
    * @returns {string[]} Array of allowed values for this param
    */
   static getEnum(param) {
+    if (this.routeEnum) {
+      return this.routeEnum
+    }
+
+    // TODO Remove after #11371 is merged the old route extraction.
+    // replace with error if routeEnum and this function is called.
     if (!('pattern' in this.route)) {
       throw new Error('getEnum() requires route to have a .pattern property')
     }
@@ -411,6 +433,15 @@ class BaseService {
         ? 'credentials have not been configured'
         : 'credentials are misconfigured'
       serviceError = new ImproperlyConfigured({ prettyMessage })
+    }
+
+    if (!serviceError && this.routeEnum) {
+      const firstParamName = Object.keys(namedParams || {})[0]
+      if (firstParamName) {
+        if (!this.routeEnum.includes(namedParams[firstParamName])) {
+          serviceError = new InvalidParameter()
+        }
+      }
     }
 
     const { queryParamSchema } = this.route
