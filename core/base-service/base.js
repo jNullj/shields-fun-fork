@@ -122,15 +122,16 @@ class BaseService {
    * @returns {string[]} Array of allowed values for this param
    */
   static getEnum(param) {
+    if (!('pattern' in this.route)) {
+      throw new Error('getEnum() requires route to have a .pattern property')
+    }
+
     if (this.routeEnum) {
       return this.routeEnum
     }
 
     // TODO Remove after #11371 is merged the old route extraction.
     // replace with error if routeEnum and this function is called.
-    if (!('pattern' in this.route)) {
-      throw new Error('getEnum() requires route to have a .pattern property')
-    }
     const enumeration = getEnum(this.route.pattern, param)
     if (!Array.isArray(enumeration)) {
       throw new Error(
