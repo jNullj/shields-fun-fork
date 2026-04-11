@@ -127,6 +127,16 @@ class BaseService {
     }
 
     if (this.routeEnum) {
+      if (
+        !Array.isArray(this.routeEnum) ||
+        this.routeEnum.length === 0 ||
+        !this.routeEnum.every(item => typeof item === 'string')
+      ) {
+        throw new Error(
+          `getEnum() requires routeEnum for ${this.name} to be a non-empty array of strings`,
+        )
+      }
+
       return this.routeEnum
     }
 
