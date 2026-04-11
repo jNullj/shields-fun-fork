@@ -439,7 +439,9 @@ class BaseService {
       const firstParamName = Object.keys(namedParams || {})[0]
       if (firstParamName) {
         if (!this.routeEnum.includes(namedParams[firstParamName])) {
-          serviceError = new InvalidParameter()
+          serviceError = new InvalidParameter({
+            prettyMessage: `invalid parameter ${firstParamName}: ${namedParams[firstParamName]}`,
+          })
         }
       }
     }
