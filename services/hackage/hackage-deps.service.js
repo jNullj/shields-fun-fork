@@ -1,6 +1,6 @@
-import { deprecatedService } from '../index.js'
+import { retiredService } from '../index.js'
 
-export const HackageDeps = deprecatedService({
+export const HackageDeps = retiredService({
   category: 'dependencies',
   route: {
     base: 'hackage-deps/v',

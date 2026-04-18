@@ -2,13 +2,13 @@ import { ServiceTester } from '../tester.js'
 
 export const t = new ServiceTester({
   id: 'visualstudiomarketplace',
-  title: 'Visual Studio Marketplace (deprecated)',
+  title: 'Visual Studio Marketplace (retired)',
   pathPrefix: '/visual-studio-marketplace',
 })
 
 export const tLegacy = new ServiceTester({
   id: 'visualstudiomarketplacelegacy',
-  title: 'VSCode Marketplace (deprecated)',
+  title: 'VSCode Marketplace (retired)',
   pathPrefix: '/vscode-marketplace',
 })
 

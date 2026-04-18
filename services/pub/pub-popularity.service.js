@@ -1,6 +1,6 @@
-import { deprecatedService } from '../index.js'
+import { retiredService } from '../index.js'
 
-export const PubPopularity = deprecatedService({
+export const PubPopularity = retiredService({
   category: 'rating',
   route: {
     base: 'pub/popularity',

@@ -6,7 +6,7 @@ import BaseSvgScrapingService from './base-svg-scraping.js'
 import BaseTomlService from './base-toml.js'
 import BaseXmlService from './base-xml.js'
 import BaseYamlService from './base-yaml.js'
-import deprecatedService from './deprecated-service.js'
+import retiredService from './deprecated-service.js'
 import redirector from './redirector.js'
 import {
   NotFound,
@@ -26,7 +26,7 @@ export {
   BaseTomlService,
   BaseXmlService,
   BaseYamlService,
-  deprecatedService,
+  retiredService,
   redirector,
   NotFound,
   InvalidResponse,

@@ -1,6 +1,6 @@
-import { deprecatedService } from '../index.js'
+import { retiredService } from '../index.js'
 
-export const Coincap = deprecatedService({
+export const Coincap = retiredService({
   category: 'other',
   route: {
     base: 'coincap',

@@ -1,4 +1,4 @@
-import { deprecatedService } from '../index.js'
+import { retiredService } from '../index.js'
 
 const commonProps = {
   category: 'coverage',
@@ -8,14 +8,14 @@ const commonProps = {
 }
 
 export default [
-  deprecatedService({
+  retiredService({
     route: {
       base: 'jenkins',
       pattern: ':coverageFormat(j|c)/:protocol(http|https)/:host/:job+',
     },
     ...commonProps,
   }),
-  deprecatedService({
+  retiredService({
     route: {
       base: 'jenkins/coverage',
       pattern:
@@ -23,7 +23,7 @@ export default [
     },
     ...commonProps,
   }),
-  deprecatedService({
+  retiredService({
     route: {
       base: 'jenkins/coverage/api',
       pattern: '',
